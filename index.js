@@ -1,4 +1,147 @@
 $(document).ready(function(){
+  // Navigation functionality
+  const navbar = $('.navbar');
+  const navLinks = $('.nav-link');
+  const hamburger = $('.hamburger');
+  const navMenu = $('.nav-menu');
+
+  // Typing animation for hero description
+  const textArray = [
+    "Passionate about creating innovative solutions and beautiful user experiences",
+    "When I am not coding I like to play racket sports, hit the gym and experience new things"
+  ];
+  
+  let textIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 50;
+  const deletingSpeed = 25;
+  const pauseBetweenTexts = 1500;
+  const pauseAfterComplete = 2500;
+
+  function typeWriter() {
+    const typingElement = document.getElementById('typing-text');
+    const currentText = textArray[textIndex];
+    
+    // Always add cursor class for persistent typing effect
+    typingElement.classList.add('typing-cursor');
+    
+    if (!isDeleting) {
+      // Typing
+      typingElement.innerHTML = currentText.substring(0, charIndex + 1);
+      charIndex++;
+      
+      if (charIndex === currentText.length) {
+        // Finished typing current text
+        isDeleting = true;
+        setTimeout(typeWriter, pauseAfterComplete);
+        return;
+      }
+    } else {
+      // Deleting
+      typingElement.innerHTML = currentText.substring(0, charIndex - 1);
+      charIndex--;
+      
+      if (charIndex === 0) {
+        // Finished deleting
+        isDeleting = false;
+        textIndex = (textIndex + 1) % textArray.length;
+        setTimeout(typeWriter, pauseBetweenTexts);
+        return;
+      }
+    }
+    
+    const speed = isDeleting ? deletingSpeed : typingSpeed;
+    setTimeout(typeWriter, speed);
+  }
+
+  // Start the typing animation immediately and ensure cursor is always present
+  setTimeout(() => {
+    document.getElementById('typing-text').classList.add('typing-cursor');
+    typeWriter();
+  }, 500); // Start after 0.5 seconds (was 1 second)
+
+  // Smooth scrolling for navigation links
+  navLinks.click(function(e) {
+    e.preventDefault();
+    const targetId = $(this).attr('href');
+    const targetSection = $(targetId);
+    
+    if (targetSection.length) {
+      $('html, body').animate({
+        scrollTop: targetSection.offset().top - 80
+      }, 200);
+    }
+    
+    // Close mobile menu if open
+    navMenu.removeClass('active');
+    hamburger.removeClass('active');
+  });
+
+  // Scroll indicators functionality
+  $('.scroll-indicator').click(function(e) {
+    e.preventDefault();
+    const nextSection = $(this).data('next');
+    const targetSection = $('#' + nextSection);
+    
+    if (targetSection.length) {
+      $('html, body').animate({
+        scrollTop: targetSection.offset().top - 80
+      }, 200);
+    }
+  });
+
+  // Mobile menu toggle
+  hamburger.click(function() {
+    $(this).toggleClass('active');
+    navMenu.toggleClass('active');
+  });
+
+  // Navbar scroll effect
+  $(window).scroll(function() {
+    if ($(window).scrollTop() > 50) {
+      navbar.addClass('scrolled');
+    } else {
+      navbar.removeClass('scrolled');
+    }
+  });
+
+  // Contact form submission
+  $('.contact-form').submit(function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const name = $('#name').val();
+    const email = $('#email').val();
+    const subject = $('#subject').val();
+    const message = $('#message').val();
+    
+    // Here you would typically send the form data to a server
+    // For now, we'll just show an alert
+    alert(`Thank you ${name}! Your message has been sent. I'll get back to you soon.`);
+    
+    // Reset form
+    this.reset();
+  });
+
+  // Scroll animations for sections
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections
+  $('.section').each(function() {
+    observer.observe(this);
+  });
 
   var intro = $("#intro");
 
@@ -10,6 +153,14 @@ $(document).ready(function(){
       {opacity: 1}
     );
   }
+  
+  const heroContent = $('.hero-content');
+  if (heroContent.length) {
+    setTimeout(() => {
+      $('.scroll-indicator').fadeIn(1000);
+    }, 2000);
+  }
+
   intro.animate( {width: '400px'},1200);
   intro.animate( {height: '120px'},1200, function(){
     $("#intro").addClass("p-6");
@@ -335,7 +486,7 @@ function createPointFlowers() {
   pointFlower.fader = Vector3.create(0.0, 10.0, 0.0);
 
   // paramerters: velocity[3], rotate[3]
-  pointFlower.numFlowers = 1600;
+  pointFlower.numFlowers = 600;
   pointFlower.particles = new Array(pointFlower.numFlowers);
   // vertex attributes {position[3], euler_xyz[3], size[1]}
   pointFlower.dataArray = new Float32Array(pointFlower.numFlowers * (3 + 3 + 2));
@@ -373,11 +524,11 @@ function initPointFlowers() {
     var tmpprtcl = pointFlower.particles[i];
 
     //velocity
-    tmpv3.x = symmetryrand() * 0.3 + 0.8;
-    tmpv3.y = symmetryrand() * 0.2 - 1.0;
-    tmpv3.z = symmetryrand() * 0.3 + 0.5;
+    tmpv3.x = symmetryrand() * 0.2 + 0.4;
+    tmpv3.y = symmetryrand() * 0.1 - 0.6;
+    tmpv3.z = symmetryrand() * 0.2 + 0.3;
     Vector3.normalize(tmpv3);
-    tmpv = 2.0 + Math.random() * 1.0;
+    tmpv = 0.7 + Math.random() * 0.6;
     tmpprtcl.setVelocity(tmpv3.x * tmpv, tmpv3.y * tmpv, tmpv3.z * tmpv);
 
     //rotation
@@ -402,7 +553,7 @@ function initPointFlowers() {
     );
 
     //size
-    tmpprtcl.setSize(0.9 + Math.random() * 0.1);
+    tmpprtcl.setSize(0.4 + Math.random() * 0.3);
   }
 }
 
