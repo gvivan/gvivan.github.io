@@ -504,6 +504,14 @@ canvas {
   transition: all 0.3s ease;
 }
 
+.contact-method > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
 .contact-method:hover {
   transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.1);
@@ -696,20 +704,22 @@ canvas {
 
   /* Timeline responsive styles */
   .journey-timeline::before {
-    left: 30px;
+    left: 30px !important;
+    transform: none !important;
   }
   
   .timeline-item:nth-child(odd) .timeline-content,
   .timeline-item:nth-child(even) .timeline-content {
-    margin-left: 70px;
-    margin-right: 0;
-    text-align: left;
-    padding-left: 2rem;
-    padding-right: 1rem;
+    margin-left: 30px !important;
+    margin-right: 0 !important;
+    text-align: left !important;
+    padding-left: 2rem !important;
+    padding-right: 1rem !important;
   }
   
   .timeline-marker {
-    left: 30px;
+    left: 30px !important;
+    transform: translateX(-50%) !important;
     width: 40px;
     height: 40px;
   }
@@ -738,12 +748,23 @@ canvas {
   }
 
   .contact-methods {
-    flex-direction: column;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    align-items: center !important;
+    grid-template-columns: none !important;
+    margin-bottom: 3rem !important;
   }
 
   .contact-method {
     min-width: 280px;
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .contact-method:nth-child(3) {
+    grid-column: unset !important;
+    justify-self: unset !important;
   }
 }
 
@@ -806,6 +827,18 @@ canvas {
   .timeline-item:nth-child(odd) .timeline-header,
   .timeline-item:nth-child(even) .timeline-header {
     flex-direction: row;
+  }
+  
+  /* Ensure timeline line position for smaller screens */
+  .timeline-marker {
+    left: 30px !important;
+    transform: translateX(-50%) !important;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .timeline-marker i {
+    font-size: 1rem;
   }
 }
 
@@ -977,11 +1010,4 @@ canvas {
   flex-shrink: 0;
 }
 
-.contact-methods {
-  flex-direction: column;
-  align-items: center;
-}
 
-.contact-method {
-  min-width: 250px;
-}
