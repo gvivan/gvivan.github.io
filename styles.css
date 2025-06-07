@@ -277,6 +277,10 @@ canvas {
   z-index: 10;
 }
 
+.hero .scroll-indicator {
+  bottom: 4rem;
+}
+
 .scroll-indicator:hover {
   color: #ffd93d;
   transform: translateX(-50%) scale(1.2);
