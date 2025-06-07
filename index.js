@@ -486,7 +486,9 @@ function createPointFlowers() {
   pointFlower.fader = Vector3.create(0.0, 10.0, 0.0);
 
   // paramerters: velocity[3], rotate[3]
-  pointFlower.numFlowers = 600;
+  // Reduce flowers on mobile devices
+  var isMobile = window.innerWidth <= 768;
+  pointFlower.numFlowers = isMobile ? 200 : 600;
   pointFlower.particles = new Array(pointFlower.numFlowers);
   // vertex attributes {position[3], euler_xyz[3], size[1]}
   pointFlower.dataArray = new Float32Array(pointFlower.numFlowers * (3 + 3 + 2));
