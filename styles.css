@@ -280,6 +280,7 @@ canvas {
 @media (max-width: 768px) {
   .hero .scroll-indicator {
     bottom: 6rem;
+    left: 48%;
   }
   
   .hero-description {
