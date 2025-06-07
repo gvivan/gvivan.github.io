@@ -802,6 +802,10 @@ canvas {
     margin-bottom: 1rem;
   }
 
+  #projects .projects-grid {
+    margin-bottom: 3rem;
+  }
+
   .skill-category {
     padding: 1.5rem;
   }
@@ -1009,5 +1013,3 @@ canvas {
   border-radius: 12px;
   flex-shrink: 0;
 }
-
-
