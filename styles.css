@@ -277,8 +277,10 @@ canvas {
   z-index: 10;
 }
 
-.hero .scroll-indicator {
-  bottom: 4rem;
+@media (max-width: 768px) {
+  .hero .scroll-indicator {
+    bottom: 8rem;
+  }
 }
 
 .scroll-indicator:hover {
