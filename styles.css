@@ -281,6 +281,10 @@ canvas {
   .hero .scroll-indicator {
     bottom: 6rem;
   }
+  
+  .hero-description {
+    padding: 0 2.5rem;
+  }
 }
 
 .scroll-indicator:hover {
