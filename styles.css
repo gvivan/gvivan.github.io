@@ -143,6 +143,51 @@ canvas {
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
+/* Sakura Toggle Button */
+.sakura-toggle {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.sakura-btn {
+  background: rgba(255, 107, 157, 0.1);
+  border: 2px solid rgba(255, 107, 157, 0.3);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #ff6b9d;
+  font-size: 1.2rem;
+}
+
+.sakura-btn:hover {
+  background: rgba(255, 107, 157, 0.2);
+  border-color: rgba(255, 107, 157, 0.6);
+  transform: scale(1.1);
+}
+
+.sakura-btn.active {
+  background: rgba(255, 107, 157, 0.3);
+  border-color: #ff6b9d;
+  color: #ffffff;
+}
+
+.sakura-btn.inactive {
+  background: rgba(128, 128, 128, 0.1);
+  border-color: rgba(128, 128, 128, 0.3);
+  color: #888;
+}
+
+.sakura-btn.inactive:hover {
+  background: rgba(128, 128, 128, 0.2);
+  border-color: rgba(128, 128, 128, 0.6);
+}
+
 /* Hero Section */
 .hero {
   height: 100vh;
@@ -695,6 +740,23 @@ canvas {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+
+  .nav-container {
+    position: relative;
+  }
+
+  .sakura-toggle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+  }
+
+  .sakura-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
   }
 
   .contact-content {

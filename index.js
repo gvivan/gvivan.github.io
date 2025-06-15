@@ -143,6 +143,31 @@ $(document).ready(function(){
     observer.observe(this);
   });
 
+  // Sakura toggle functionality
+  let sakuraAnimationActive = true;
+  const sakuraToggleBtn = $('#sakura-toggle-btn');
+  const sakuraCanvas = $('#sakura');
+  
+  sakuraToggleBtn.addClass('active');
+  
+  sakuraToggleBtn.click(function() {
+    sakuraAnimationActive = !sakuraAnimationActive;
+    
+    if (sakuraAnimationActive) {
+      sakuraCanvas.show();
+      sakuraToggleBtn.removeClass('inactive').addClass('active');
+      sakuraToggleBtn.attr('title', 'Turn Off Sakura Animation');
+      if (!animating) {
+        animating = true;
+        animate();
+      }
+    } else {
+      sakuraCanvas.hide();
+      sakuraToggleBtn.removeClass('active').addClass('inactive');
+      sakuraToggleBtn.attr('title', 'Turn On Sakura Animation');
+    }
+  });
+
   var intro = $("#intro");
 
   function fadeAndSlide (eName,dTime,SlideSpeed){
