@@ -535,7 +535,7 @@ canvas {
 .contact-methods {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  gap: 1rem;
   justify-items: center;
   max-width: 600px;
   margin: 0 auto;
